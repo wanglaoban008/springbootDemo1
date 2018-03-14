@@ -14,8 +14,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+import java.io.ByteArrayOutputStream;
 
-@RequestMapping(value = "/aa",method = RequestMethod.GET)
+@RequestMapping(value = "/aa")
 @Controller
 public class aa {
 
@@ -28,30 +29,52 @@ public class aa {
     }
 
     @RequestMapping("/getCode")
+    public void getCode( String phone, String uniqueId, Long userId,
+                            HttpServletResponse response) throws IOException {
+        response.setHeader("Cache-Control", "no-store, no-cache");
+        response.setContentType("image/jpeg");
+        // 生成图片验证码
+        BufferedImage img = new BufferedImage(60, 30, BufferedImage.TYPE_INT_RGB);
+        //  表示一个图像，它具有合成整数像素的 8 位 RGB 颜色分量。
+        Graphics g = img.getGraphics();
+        String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder sb=new StringBuilder(4);
+        for(int i=0;i<4;i++)
+        {
+            char ch=str.charAt(new Random().nextInt(str.length()));
+            sb.append(ch);
+        }
+        System.out.println(sb.toString());
+        g.drawString(sb.toString(),10,20);
+        //使用此图形上下文的当前字体和颜色绘制由指定 string 给定的文本。最左侧字符的基线位于此图形上下文坐标系的 (x, y) 位置处。
+        g.dispose();////类似于流中的close()带动flush()---把数据刷到img对象当中
+
+        ServletOutputStream out = response.getOutputStream();
+        ImageIO.write(img, "jpg", out);
+        IOUtils.closeQuietly(out);
+
+//        System.out.println(out);
+//        byte[] bytes = out.toByteArray();
+//
+//        String base64bytes = Base64.encode(bytes);
+////该字符串传输至前端放入src即可显示图片，安卓可以去掉data:image/png;base64,
+//
+//        String src = "data:image/png;base64," + base64bytes;
+//        System.out.println(src);out.close();
+    }
+
+
+    /**
+     * 获取图片验证码
+     * @param phone
+     * @param uniqueId
+     * @param userId
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("/getCode")
     public void getCaptcha( String phone, String uniqueId, Long userId,
                             HttpServletResponse response) throws IOException {
-        //response.setHeader("Cache-Control", "no-store, no-cache");
-        //response.setContentType("image/jpeg");
-        //// 生成图片验证码
-        //BufferedImage img = new BufferedImage(60, 30, BufferedImage.TYPE_INT_RGB);
-        ////  表示一个图像，它具有合成整数像素的 8 位 RGB 颜色分量。
-        //Graphics g = img.getGraphics();
-        //String str="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        //StringBuilder sb=new StringBuilder(4);
-        //for(int i=0;i<4;i++)
-        //{
-        //    char ch=str.charAt(new Random().nextInt(str.length()));
-        //    sb.append(ch);
-        //}
-        //System.out.println(sb.toString());
-        //g.drawString(sb.toString(),10,20);
-        ////使用此图形上下文的当前字体和颜色绘制由指定 string 给定的文本。最左侧字符的基线位于此图形上下文坐标系的 (x, y) 位置处。
-        //g.dispose();////类似于流中的close()带动flush()---把数据刷到img对象当中
-        //
-        //ServletOutputStream out = response.getOutputStream();
-        //ImageIO.write(img, "jpg", out);
-        //IOUtils.closeQuietly(out);
-
         ServletOutputStream os = response.getOutputStream();
         int w =80;
         int h =40;
