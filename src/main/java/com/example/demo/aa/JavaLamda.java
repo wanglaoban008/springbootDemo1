@@ -1,12 +1,12 @@
 package com.example.demo.aa;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import com.example.demo.entity.AppleEntity;
+import com.example.demo.entity.TransactionEntity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -18,74 +18,74 @@ import java.util.stream.Collectors;
  **/
 public class JavaLamda {
 
-    public static List<Apple> filterGreenApples(List<Apple> inventory){
+    public static List<AppleEntity> filterGreenApples(List<AppleEntity> inventory){
 
-        List<Apple> result = new ArrayList<>();
-        for (Apple apple: inventory){
-            if ("green".equals(apple.getColor())) {
-                result.add(apple);
+        List<AppleEntity> result = new ArrayList<>();
+        for (AppleEntity appleEntity : inventory){
+            if ("green".equals(appleEntity.getColor())) {
+                result.add(appleEntity);
             }
         }
         return result;
     }
 
 
-    public static boolean isGreenApple(Apple apple) {
-        return "green".equals(apple.getColor());
+    public static boolean isGreenApple(AppleEntity appleEntity) {
+        return "green".equals(appleEntity.getColor());
     }
-    public static boolean isHeavyApple(Apple apple) {
-        return apple.getWeight() > 150;
+    public static boolean isHeavyApple(AppleEntity appleEntity) {
+        return appleEntity.getWeight() > 150;
     }
     public interface Predicate<T>{
         boolean test(T t);
     }
 
 
-    static List<Apple> filterApples(List<Apple> inventory,
-                                    Predicate<Apple> p) {
-        List<Apple> result = new ArrayList<>();
-        for (Apple apple : inventory) {
-            if (p.test(apple)) {
-                result.add(apple);
+    static List<AppleEntity> filterApples(List<AppleEntity> inventory,
+                                          Predicate<AppleEntity> p) {
+        List<AppleEntity> result = new ArrayList<>();
+        for (AppleEntity appleEntity : inventory) {
+            if (p.test(appleEntity)) {
+                result.add(appleEntity);
             }
         }
         return result;
     }
 
     public void aa(){
-        List<Apple> inventory= new ArrayList<>();
-        //filterApples(inventory, Apple::isGreenApple);
+        List<AppleEntity> inventory= new ArrayList<>();
+        //filterApples(inventory, AppleEntity::isGreenApple);
 
-        filterApples(inventory, (Apple a) -> "green".equals(a.getColor()) );
+        filterApples(inventory, (AppleEntity a) -> "green".equals(a.getColor()) );
 
-        //filter(inventory, (Apple a) -> a.getWeight() > 150 );
-        List<Apple> apples = new ArrayList<>();
-        apples.stream().filter(apple -> "green".equals(apple.getColor()));
+        //filter(inventory, (AppleEntity a) -> a.getWeight() > 150 );
+        List<AppleEntity> appleEntities = new ArrayList<>();
+        appleEntities.stream().filter(appleEntity -> "green".equals(appleEntity.getColor()));
 
         //stream
-        List<Apple> heavyApples1 =
-                inventory.stream().filter((Apple a) -> a.getWeight() > 150)
+        List<AppleEntity> heavyApples1 =
+                inventory.stream().filter((AppleEntity a) -> a.getWeight() > 150)
                         .collect(Collectors.toList());
 
 
         // parallelStream
-        List<Apple> heavyApples2 =
-                inventory.parallelStream().filter((Apple a) -> a.getWeight() > 150) .collect(Collectors.toList());
+        List<AppleEntity> heavyApples2 =
+                inventory.parallelStream().filter((AppleEntity a) -> a.getWeight() > 150) .collect(Collectors.toList());
 
     }
 
     public void huobi(){
 
-        Map<Currency, List<Transaction>> transactionsByCurrencies = new HashMap<>();
-        List<Transaction> transactions = new ArrayList<>();
+        Map<Currency, List<TransactionEntity>> transactionsByCurrencies = new HashMap<>();
+        List<TransactionEntity> transactionEntities = new ArrayList<>();
 
-        for (Transaction transaction : transactions) {
-            if(transaction.getPrice() > 1000){
-                Currency currency = transaction.getCurrency();
-                List<Transaction> transactionsForCurrency =
+        for (TransactionEntity transactionEntity : transactionEntities) {
+            if(transactionEntity.getPrice() > 1000){
+                Currency currency = transactionEntity.getCurrency();
+                List<TransactionEntity> transactionsForCurrency =
                         transactionsByCurrencies.get(currency);
                 if (transactionsForCurrency == null) {
-                    transactionsForCurrency = new ArrayList<Transaction>();
+                    transactionsForCurrency = new ArrayList<TransactionEntity>();
                 }else{
                     transactionsByCurrencies.put(currency,
                             transactionsForCurrency);
@@ -93,42 +93,42 @@ public class JavaLamda {
             }
         }
 
-        List<Transaction> transactionsForCurrencys
-                = transactions.stream().filter(transaction -> transaction.getPrice() > 1000)
+        List<TransactionEntity> transactionsForCurrencies
+                = transactionEntities.stream().filter(transactionEntity -> transactionEntity.getPrice() > 1000)
                 .collect(Collectors.toList());
     }
 
     public interface AppleFormatter{
-        String accept(Apple a);
+        String accept(AppleEntity a);
     }
 
     public class AppleFancyFormatter implements AppleFormatter{
-        public String accept(Apple apple){
-            String characteristic = apple.getWeight() > 150 ? "heavy" :
+        public String accept(AppleEntity appleEntity){
+            String characteristic = appleEntity.getWeight() > 150 ? "heavy" :
                     "light";
             return "A " + characteristic +
-                    " " + apple.getColor() +" apple";
+                    " " + appleEntity.getColor() +" appleEntity";
         } }
-    public class AppleSimpleFormatter implements AppleFormatter{ public String accept(Apple apple){
-        return "An apple of " + apple.getWeight() + "g";
+    public class AppleSimpleFormatter implements AppleFormatter{ public String accept(AppleEntity appleEntity){
+        return "An appleEntity of " + appleEntity.getWeight() + "g";
     }
     }
 
-    public static void prettyPrintApple(List<Apple> inventory,
+    public static void prettyPrintApple(List<AppleEntity> inventory,
                                         AppleFormatter formatter){
-        for(Apple apple: inventory){
-            String output = formatter.accept(apple);
+        for(AppleEntity appleEntity : inventory){
+            String output = formatter.accept(appleEntity);
             System.out.println(output);
         } }
 
     public void prettyPrintApple(){
-        List<Apple> inventory = new ArrayList<>();
+        List<AppleEntity> inventory = new ArrayList<>();
         prettyPrintApple(inventory, new AppleFancyFormatter());
     }
 
 
     public void sortApple(){
-        List<Apple> inventory = new ArrayList<>();
+        List<AppleEntity> inventory = new ArrayList<>();
         prettyPrintApple(inventory, new AppleFancyFormatter());
         Thread thread = new Thread(() -> System.err.println("aa"));
 
@@ -190,16 +190,51 @@ public class JavaLamda {
         forEach(Arrays.asList("aa","bb","cc"),System.out::print);
         List<Integer> ints = map(Arrays.asList("1","2","3"),Integer::parseInt);
         forEach(ints,System.out::print);
-        List<Apple> apples = new ArrayList<>();
-        apples.sort(Comparator.comparing(Apple::getWeight).reversed().thenComparing(Apple::getColor));
-        Predicate<Apple> applelist = apple -> apple.getWeight()>150;
+        List<AppleEntity> appleEntities = new ArrayList<>();
+        appleEntities.sort(Comparator.comparing(AppleEntity::getWeight).reversed().thenComparing(AppleEntity::getColor));
+        Predicate<AppleEntity> applelist = appleEntity -> appleEntity.getWeight()>150;
         //applelist.
+       
 
     }
 
     @FunctionalInterface
     public interface BufferedReaderProcessor {
         String process(BufferedReader b) throws IOException;
+    }
+    
+    /** 
+    * @Description: 比较器复合
+    * @Param:  
+    * @return:  
+    * @Author: malili 
+    * @Date: 2018/3/14 
+    */ 
+    public void compareBox(){
+        //升序排序
+        Comparator.comparing(AppleEntity::getWeight);
+        //降序排序
+        Comparator.comparing(AppleEntity::getWeight).reversed();
+        //重量相同比较颜色
+        Comparator.comparing(AppleEntity::getWeight).reversed().thenComparing(AppleEntity::getColor);
+    }
+
+    /** 
+    * @Description: 谓词复合
+    * @Param:  
+    * @return:  
+    * @Author: malili 
+    * @Date: 2018/3/14 
+    */ 
+    public void verbBox(){
+        AppleEntity appleEntity = new AppleEntity();
+        List<AppleEntity> appleEntities = new ArrayList<>();
+        appleEntities.stream().filter(appleEntity1 -> appleEntity1.getWeight()>10);
+    }
+
+    public void functionBox(){
+        Function<Integer,Integer> f = x ->x+1;
+        Function<Integer,Integer> g = x ->x+1;
     }
 
 

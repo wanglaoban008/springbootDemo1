@@ -14,11 +14,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
-import java.io.ByteArrayOutputStream;
 
 @RequestMapping(value = "/aa")
 @Controller
-public class aa {
+public class PictureCode {
 
     private static Random random = new Random();
 

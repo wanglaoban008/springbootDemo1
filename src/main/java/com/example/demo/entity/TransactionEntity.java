@@ -1,4 +1,4 @@
-package com.example.demo.aa;
+package com.example.demo.entity;
 
 import java.util.Currency;
 
@@ -8,7 +8,7 @@ import java.util.Currency;
  * @author malili
  * @create 2018-03-08 下午4:38
  **/
-public class Transaction {
+public class TransactionEntity {
 
     private int price;
     private Currency currency;
