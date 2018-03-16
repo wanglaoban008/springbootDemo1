@@ -44,14 +44,14 @@ public class Stream1 {
        for(AppleEntity d: appleEntityList){
            colors.add(d.getColor());
        }
-       colors = appleEntities.stream().filter(appleEntity -> appleEntity.getWeight()>50)
-               .sorted(Comparator.comparing(AppleEntity::getWeight))
-               .map(appleEntity -> appleEntity.getColor()).collect(Collectors.toList());
+       //colors = appleEntities.stream().filter(appleEntity -> appleEntity.getWeight()>50)
+       //        .sorted(Comparator.comparing(AppleEntity::getWeight))
+       //        .map(appleEntity -> appleEntity.getColor()).collect(Collectors.toList());
 
        // 利用多核架构并行执行
        colors = appleEntities.parallelStream().filter(appleEntity -> appleEntity.getWeight()>50)
                .sorted(Comparator.comparing(AppleEntity::getWeight))
-               .map(appleEntity -> appleEntity.getColor()).collect(Collectors.toList());
+               .map(appleEntity -> appleEntity.getColor()).limit(2).collect(Collectors.toList());
        System.err.println("colors:"+colors.size());
        colors.forEach(s -> System.err.println("colors:"+s));
        colors.forEach(System.out::println);
