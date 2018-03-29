@@ -154,7 +154,8 @@ public class UseStream {
     * @Description: 给定两个数字列表，如何返回所有的数对呢？例如，给定列表[1, 2, 3]和列表[3, 4]，应
     该返回[(1, 3), (1, 4), (2, 3), (2, 4), (3, 3), (3, 4)]。为简单起见，你可以用有两个元素的数组来代
     表数对。
-                        这个本仙女不太会，回来还得研究研究，数组打印出来也怪怪的
+                       这是生成六个数组，把六个数组加到list中，只返回总和能被3整除的
+                       这个flatmap 有点不会用，只能理解，不太会用
     * @Param:  
     * @return:  
     * @Author: malili 
@@ -167,8 +168,21 @@ public class UseStream {
                 flatMap(integer -> b.stream().map(integer1 -> new int[]{integer,integer1})).
                 collect(Collectors.toList());
         System.err.println("c:"+c.size());
-        System.err.println("c:"+c);
-        c.forEach(System.err::println);
+        //Arrays的toString方法是返回指定数组内容的字符串表示形式
+        c.stream().forEach(ints -> System.err.println("int:"+Arrays.toString(ints)));
+        //http://blog.csdn.net/csdn_misli/article/details/53081373
+        //a.toString()和Arrays.toString(a)的区别
+        //Object 类的 toString 方法返回一个字符串，该字符串由类名（对象是该类的一个实例）加上“@”和此对象哈希码的无符号十六进制表示组成
+
+        //在上面的基础上只返回总和能被3整除的数对  例如(2, 4)和(3, 3)是可以的
+        List<Integer> e = Arrays.asList(1,2,3);
+        List<Integer> f = Arrays.asList(3, 4);
+        List<int[]> g = e.stream().
+                flatMap(integer -> f.stream().filter(integer1 -> (integer + integer1) % 3 == 0).map(integer1 -> new int[]{integer, integer1})).
+                collect(Collectors.toList());
+        System.err.println(" g:"+c.size());
+        //Arrays的toString方法是返回指定数组内容的字符串表示形式
+        g.stream().forEach(ints -> System.err.println("intg:"+Arrays.toString(ints)));
     }
 
     public static void main(String[] args) {

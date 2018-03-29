@@ -15,6 +15,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
+/** 
+ * @Description: 图形验证码 
+ * @Param:  
+ * @return:  
+ * @Author: malili 
+ * @Date: 2018/3/29 
+*/ 
 @RequestMapping(value = "/aa")
 @Controller
 public class PictureCode {
