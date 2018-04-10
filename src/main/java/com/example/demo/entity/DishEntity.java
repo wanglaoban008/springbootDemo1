@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 /**
- * @program: demo
+ * @program: 菜单实体
  * @description: ${description}
  * @author: malili
  * @create: 2018-03-15 16:16

@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @create: 2018-03-29 10:27
  **/
 public class StreamMatch {
-    public static final Integer[] ints= {1,2,3,4,5};
+    public static final Integer[] ints= {1,2,3,4,5,6};
 
     /** 
      * @Description: 流中是否有一个元素能匹配给定的谓词 返回的是布尔类型
