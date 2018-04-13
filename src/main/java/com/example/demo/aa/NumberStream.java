@@ -74,5 +74,6 @@ public class NumberStream {
     }
     public static void main(String[] args) {
         sum();
+        optionalInt1();
     }
 }

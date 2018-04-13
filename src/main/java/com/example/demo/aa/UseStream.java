@@ -182,7 +182,9 @@ public class UseStream {
                 collect(Collectors.toList());
         System.err.println(" g:"+c.size());
         //Arrays的toString方法是返回指定数组内容的字符串表示形式
+        //
         g.stream().forEach(ints -> System.err.println("intg:"+Arrays.toString(ints)));
+        g.stream().forEach(ints -> System.err.println("intg1:"+ints.toString()));
     }
 
     public static void main(String[] args) {
