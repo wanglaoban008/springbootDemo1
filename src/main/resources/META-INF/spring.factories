@@ -1,0 +1,2 @@
+# 这里是为了实现自动配置 发现跟这个配置没关系里面的内容删掉也没关系
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.example.demo.autoConfig.HelloServiceAutoConfiguration

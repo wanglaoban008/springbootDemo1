@@ -1,0 +1,24 @@
+
+# spring
+spring :
+  mvc :
+    view :
+      prefix : /jsp/
+      suffix : jsp
+
+# server
+server:
+  port: 8081
+  servlet:
+    context-path: /aaa
+
+hello:
+  msg: 吧啦啦小魔仙
+
+
+
+
+
+
+
+

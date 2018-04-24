@@ -78,7 +78,7 @@ public class PictureCode {
      * @param response
      * @throws IOException
      */
-    @RequestMapping("/getCode")
+    @RequestMapping("/getCaptcha")
     public void getCaptcha( String phone, String uniqueId, Long userId,
                             HttpServletResponse response) throws IOException {
         ServletOutputStream os = response.getOutputStream();
