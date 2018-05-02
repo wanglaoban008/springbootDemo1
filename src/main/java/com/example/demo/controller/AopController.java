@@ -21,4 +21,7 @@ public class AopController {
         return "吧啦啦小魔仙变身啦！";
 
     }
+
+    public void doSome(){
+    }
 }
