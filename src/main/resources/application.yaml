@@ -15,6 +15,11 @@ server:
 hello:
   msg: 吧啦啦小魔仙
 
+valueTest :
+  url :
+    testHello : 你好帅呀哈哈哈~
+    testMe : 哎呀呀
+
 
 
 
