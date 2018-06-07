@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @program:
  * @description:  这里直接用@Value 就直接自动配置了
- * @author: malili
+ * @author:  malili
  * @create: 2018-06-05 14:37
  **/
 @RestController

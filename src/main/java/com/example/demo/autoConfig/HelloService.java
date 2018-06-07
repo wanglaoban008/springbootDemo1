@@ -1,11 +1,14 @@
 package com.example.demo.autoConfig;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @program:
  * @description:
  * @author: malili
  * @create: 2018-04-24 16:04
  **/
+@Component
 public class HelloService {
     private String msg;
     public String sayHello(){

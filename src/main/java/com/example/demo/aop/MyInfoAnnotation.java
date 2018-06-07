@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD,ElementType.PARAMETER})
 public @interface MyInfoAnnotation {
-    String value() default "111";
+    String value() default "hao";
 }

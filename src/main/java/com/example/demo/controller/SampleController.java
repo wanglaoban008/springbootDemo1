@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.autoConfig.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +39,8 @@ public class SampleController {
         return helloService.sayHello();
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(SampleController.class,args);
-    }
+    //public static void main(String[] args) {
+    //    SpringApplication.run(SampleController.class,args);
+    //}
 
 }

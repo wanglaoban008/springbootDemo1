@@ -1,6 +1,7 @@
 package com.example.demo.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class TestAop {
+
     /*
     * 定义一个切入点
     */
@@ -47,5 +49,16 @@ public class TestAop {
         System.out.println(annotation.value());
 
         return annotation.value();
+    }
+
+    @AfterReturning(returning = "ret",pointcut = "excudeController()")
+    public void sysLog(Object ret){
+        //ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        //HttpServletRequest request = attributes.getRequest();
+        //String meiNv  = request.getParameter("meinv");
+        //if (!StringUtils.isEmpty(meiNv)){
+        //    System.err.println(meiNv+"是超级大美女");
+        //}
+        System.err.println(ret+"打你哟~");
     }
 }
